@@ -41,7 +41,7 @@ public class InventoryItemController {
 
     @GetMapping("/productCode/{productCode}")
     public ResponseEntity<List<InventoryItemDTO>> getInventoryItemByProductCode(@PathVariable String productCode) {
-        List<InventoryItemDTO> items = inventoryItemService.getInventoryItemByProductCode(productCode, new InventoryItemDTO());
+        List<InventoryItemDTO> items = inventoryItemService.getInventoryItemByProductCode(productCode);
         return ResponseEntity.ok(items);
     }
 

@@ -16,7 +16,7 @@ public interface InventoryItemService {
 
 //    List<InventoryItemDTO> getAllInventoryItems();
 
-    List<InventoryItemDTO> getInventoryItemByProductCode(String productCode, InventoryItemDTO inventoryItemDTO);
+    List<InventoryItemDTO> getInventoryItemByProductCode(String productCode);
 
     List<InventoryItemDTO> getItemsByCategory(String category);
 
