@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -84,6 +86,13 @@ public class PaymentServiceImpl implements PaymentService {
             return response;
         }
     }
+
+    @Override
+    public List<Payment> getPaymentsByStripeId(String chargeId) {
+        return paymentRepository.findByStripeChargeId(chargeId);
+    }
+
+
 
 
 }
