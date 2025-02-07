@@ -42,12 +42,7 @@ public class PaymentServiceImpl implements PaymentService {
         Charge charge = null;
 
         try {
-            charge = stripeService.createCharge(
-                    request.getAmount(),
-                    request.getCurrency(),
-                    request.getToken(),
-                    "Payment Charge"
-            );
+            charge = getPaymentCharge(request);
             log.info("Stripe charge created with id: {}", charge.getId());
 
             Payment payment = paymentMapper.toPayment(request);
@@ -66,7 +61,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             if (charge != null) {
                 try {
-                    Refund refund = stripeService.refundCharge(charge.getId());
+                    Refund refund = getRefund(charge);
                     log.info("Refund issued for charge id {}: refund id {}", charge.getId(), refund.getId());
                 } catch (StripeException stripeEx) {
                     log.error("Error refunding charge {}: {}", charge.getId(), stripeEx.getMessage());
@@ -85,6 +80,19 @@ public class PaymentServiceImpl implements PaymentService {
 
             return response;
         }
+    }
+
+    private Refund getRefund(Charge charge) throws StripeException {
+        return stripeService.refundCharge(charge.getId());
+    }
+
+    private Charge getPaymentCharge(PaymentRequestDTO request) throws StripeException {
+        return stripeService.createCharge(
+                request.getAmount(),
+                request.getCurrency(),
+                request.getToken(),
+                "Payment Charge"
+        );
     }
 
     @Override
