@@ -10,6 +10,8 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -38,6 +40,7 @@ public class IrrigationScheduleServiceImpl implements IrrigationScheduleService 
     }
 
     @Override
+    @Cacheable(value = "inventoryItems", key = "#id", unless = "#result == null")
     @RateLimiter(name = RATE_LIMITER_NAME, fallbackMethod = "getScheduleByIdFallback")
     @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "getScheduleByIdFallback")
     public List<IrrigationScheduleDTO> getScheduleById(Long id) {
@@ -58,6 +61,7 @@ public class IrrigationScheduleServiceImpl implements IrrigationScheduleService 
     }
 
     @Override
+    @CacheEvict(value = "inventoryItems", key = "#id")
     @RateLimiter(name = RATE_LIMITER_NAME, fallbackMethod = "updateScheduleFallback")
     @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "updateScheduleFallback")
     public IrrigationScheduleDTO updateSchedule(Long id, IrrigationScheduleDTO scheduleDTO) {
