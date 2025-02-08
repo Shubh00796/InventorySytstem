@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,6 +76,7 @@ public class IrrigationScheduleServiceImpl implements IrrigationScheduleService 
 
     @Override
     @CircuitBreaker(name = CIRCUIT_BREAKER_NAME, fallbackMethod = "deleteScheduleFallback")
+
     public void deleteSchedule(Long id) {
         log.info("Deleting irrigation schedule with ID: {}", id);
         if (!irrigationScheduleRepository.existsById(id)) {
@@ -82,7 +84,6 @@ public class IrrigationScheduleServiceImpl implements IrrigationScheduleService 
         }
         irrigationScheduleRepository.deleteById(id);
     }
-
 
     private List<IrrigationScheduleDTO> getAllSchedulesFallback(Throwable e) {
         log.error("Fallback: Unable to fetch all schedules. Error: {}", e.getMessage());
@@ -108,18 +109,38 @@ public class IrrigationScheduleServiceImpl implements IrrigationScheduleService 
         log.error("Fallback: Unable to delete schedule for id {}. Error: {}", id, e.getMessage());
     }
 
-    private static void updateScheduleFields(IrrigationScheduleDTO scheduleDTO, IrrigationSchedule existingSchedule) {
-        if (scheduleDTO.getFieldName() != null) {
-            existingSchedule.setFieldName(scheduleDTO.getFieldName());
-        }
-        if (scheduleDTO.getWaterAmount() != null) {
-            existingSchedule.setWaterAmount(scheduleDTO.getWaterAmount());
-        }
-        if (scheduleDTO.getScheduleTime() != null) {
-            existingSchedule.setScheduleTime(scheduleDTO.getScheduleTime());
-        }
-        if (scheduleDTO.getActive() != null) {
-            existingSchedule.setActive(scheduleDTO.getActive());
-        }
+//    private static void updateScheduleFields(IrrigationScheduleDTO scheduleDTO, IrrigationSchedule existingSchedule) {
+//        if (scheduleDTO.getFieldName() != null) {
+//            existingSchedule.setFieldName(scheduleDTO.getFieldName());
+//        }
+//        if (scheduleDTO.getWaterAmount() != null) {
+//            existingSchedule.setWaterAmount(scheduleDTO.getWaterAmount());
+//        }
+//        if (scheduleDTO.getScheduleTime() != null) {
+//            existingSchedule.setScheduleTime(scheduleDTO.getScheduleTime());
+//        }
+//        if (scheduleDTO.getActive() != null) {
+//            existingSchedule.setActive(scheduleDTO.getActive());
+//        }
+//    }
+
+    private void updateScheduleFields(IrrigationScheduleDTO scheduleDTO, IrrigationSchedule existingSchedule) {
+        List<Consumer<IrrigationSchedule>> updates = List.of(
+                s -> {
+                    if (scheduleDTO.getFieldName() != null) s.setFieldName(scheduleDTO.getFieldName());
+                },
+                s -> {
+                    if (scheduleDTO.getWaterAmount() != null) s.setWaterAmount(scheduleDTO.getWaterAmount());
+                },
+                s -> {
+                    if (scheduleDTO.getScheduleTime() != null) s.setScheduleTime(scheduleDTO.getScheduleTime());
+                },
+                s -> {
+                    if (scheduleDTO.getActive() != null) s.setActive(scheduleDTO.getActive());
+                }
+        );
+
+        updates.forEach(update -> update.accept(existingSchedule));
     }
+
 }
