@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class ArticleFactory implements ContentFactory {
     @Override
     public Content createContent(String id, String title, String description) {
-        return new Article(id, title, "Article", description, "Default Author"); // ✅ Ensure Type is Correct
+        return new Article(id, title, "Article", description, "Default Author");
     }
+
 }

@@ -8,6 +8,8 @@ import lombok.*;
 public class Article extends Content {
     private String author;
 
-    public Article(String id, String title, String article, String description, String unknownAuthor) {
+    public Article(String id, String title, String type, String description, String author) {
+        super(id, title, type, description);
+        this.author = author;
     }
 }

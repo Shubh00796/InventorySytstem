@@ -3,7 +3,7 @@ package com.inventory.management.Factories;
 import com.inventory.management.Model.News;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("newsFactory")
 public class NewsFactory implements ContentFactory {
     @Override
     public News createContent(String id, String title, String description) {

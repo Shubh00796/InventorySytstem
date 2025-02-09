@@ -14,20 +14,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/content")
-@RequiredArgsConstructor
 @Tag(name = "Content Management", description = "APIs for managing content")
 public class ContentController {
 
     private final ContentService contentService;
-    @Qualifier("articleFactory")
     private final ContentFactory contentFactory;
+
+    public ContentController(@Qualifier("articleFactory") ContentFactory contentFactory, ContentService contentService) {
+        this.contentFactory = contentFactory;
+        this.contentService = contentService;
+    }
 
     @PostMapping
     public ResponseEntity<ContentDTO> createContent(
             @RequestParam String id,
             @RequestParam String title,
             @RequestParam String description) {
-
         ContentDTO contentDTO = contentService.createContent(contentFactory, id, title, description);
         return ResponseEntity.ok(contentDTO);
     }
