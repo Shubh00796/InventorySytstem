@@ -7,6 +7,9 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ContentMapper {
+
+    @Mapping(target = "type", expression = "java(content.getType() != null ? content.getType() : \"Unknown\")")
     ContentDTO toDTO(Content content);
-    Content toEntity(ContentDTO contentDTO);
+
+    Content toEntity(ContentDTO dto);
 }

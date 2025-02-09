@@ -21,7 +21,7 @@ public class ContentRepository {
         return new ArrayList<>(contentStorage.values());
     }
 
-    public void delete(String id) {
+    public void deleteById(String id) {  // ✅ Fixed method name
         contentStorage.remove(id);
     }
 }

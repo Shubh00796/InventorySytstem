@@ -9,6 +9,7 @@ import com.inventory.management.service.ContentService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,24 +20,19 @@ import java.util.stream.Collectors;
 public class ContentServiceImpl implements ContentService {
 
     private final ContentRepository contentRepository;
-    private final ContentMapper contentMapper;
+    private final ContentMapper contentMapper;  // ✅ Ensure Proper Injection
 
     @Override
     @CircuitBreaker(name = "contentService", fallbackMethod = "fallbackMethod")
     @RateLimiter(name = "contentService")
     public ContentDTO createContent(ContentFactory factory, String id, String title, String description) {
+        Content content = factory.createContent(id, title, description);
         System.out.println("Received ID: " + id);
         System.out.println("Received Title: " + title);
         System.out.println("Received Description: " + description);
-        Content content = factory.createContent(id, title, description);
-        System.out.println("Created Content: " + content);
-
         contentRepository.save(content);
-
-        return contentMapper.toDTO(content); // ✅ Ensures Mapping is Applied
-
+        return contentMapper.toDTO(content);
     }
-
 
     @Override
     public List<ContentDTO> getAllContent() {
@@ -54,11 +50,11 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public void deleteContent(String id) {
-        contentRepository.delete(id);
+        contentRepository.deleteById(id);
     }
 
-
-    public ContentDTO fallbackMethod(Exception ex) {
+    public ContentDTO fallbackMethod(ContentFactory factory, String id, String title, String description, Exception ex) {
+        System.out.println("Fallback method triggered due to: " + ex.getMessage());
         return new ContentDTO("N/A", "Service Down", "N/A", "Fallback Content");
     }
 }
