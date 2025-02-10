@@ -24,6 +24,10 @@ public class CurrencyConversionStrategyFactoryImpl implements CurrencyConversion
 
     @Override
     public CurrencyConversionStrategy getCurrencyConversionStrategy(ConversionType conversionType) {
+        return getConversionStrategy(conversionType);
+    }
+
+    private CurrencyConversionStrategy getConversionStrategy(ConversionType conversionType) {
         switch (conversionType) {
             case REALTIME:
                 return realTimeConversionStrategy;
