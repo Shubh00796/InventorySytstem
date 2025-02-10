@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -89,10 +90,12 @@ public class CurrencyConversionJobServiceImpl implements CurrencyConversionJobSe
 
 
     private void updateJobFields(CurrencyConversionJob job, CurrencyConversionJobRequestDto requestDto) {
-        job.setSourceCurrency(requestDto.getSourceCurrency());
-        job.setTargetCurrency(requestDto.getTargetCurrency());
-        job.setAmount(requestDto.getAmount());
-        job.setConversionType(requestDto.getConversionType());
+        Optional.ofNullable(requestDto.getSourceCurrency()).ifPresent(job::setSourceCurrency);
+        Optional.ofNullable(requestDto.getTargetCurrency()).ifPresent(job::setTargetCurrency);
+        Optional.ofNullable(requestDto.getAmount()).ifPresent(job::setAmount);
+        Optional.ofNullable(requestDto.getConversionType()).ifPresent(job::setConversionType);
+
         job.setUpdatedAt(LocalDateTime.now());
     }
+
 }
