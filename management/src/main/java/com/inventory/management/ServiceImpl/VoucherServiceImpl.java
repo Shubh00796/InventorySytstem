@@ -38,6 +38,7 @@ public class VoucherServiceImpl implements VoucherService {
     @Override
     public VoucherDTO createVoucher(VoucherDTO voucherDTO) {
         Voucher voucher = voucherMapper.toEntity(voucherDTO);
+
         Voucher savedVoucher = voucherRepositoryService.saveVoucher(voucher);
         return voucherMapper.toDTO(savedVoucher);
     }
