@@ -32,7 +32,6 @@ public class QuoteController {
         return ResponseEntity.status(201).body(createdQuote);
     }
 
-    // PUT update an existing quote
     @PutMapping("/{id}")
     public ResponseEntity<QuoteDTO> updateQuote(@PathVariable Long id, @Valid @RequestBody QuoteDTO quoteDTO) {
         QuoteDTO updatedQuote = quoteService.updateQuote(id, quoteDTO);
