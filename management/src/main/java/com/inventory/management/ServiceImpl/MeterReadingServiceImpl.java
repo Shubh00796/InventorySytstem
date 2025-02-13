@@ -21,8 +21,7 @@ import java.util.stream.Collectors;
 public class MeterReadingServiceImpl implements MeterReadingService {
 
     private final MeterReadingMapper mapper;
-    private final MeterReadingAdapterFactory adapterFactory;
-    private final ObjectMapper objectMapper;
+
     private final MeterReadingReposiotryService reposiotryService;
     private final MeterReadingPayloadProcessor payloadProcessor; // Injecting the processor
 
