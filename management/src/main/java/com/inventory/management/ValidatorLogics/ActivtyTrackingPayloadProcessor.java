@@ -3,10 +3,9 @@ package com.inventory.management.ValidatorLogics;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inventory.management.Dtos.FitbitActivityDTO;
 import com.inventory.management.Dtos.GarminActivityDTO;
-import com.inventory.management.Dtos.VendorBMeterReadingDTO;
 import com.inventory.management.Model.ActivityData;
-import com.inventory.management.VendorInterfaces.ActivityDataAdapter;
-import com.inventory.management.VendorInterfaces.ActivityDataAdapterFactory;
+import com.inventory.management.DesignPatternInterfaces.ActivityDataAdapter;
+import com.inventory.management.DesignPatternInterfaces.ActivityDataAdapterFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

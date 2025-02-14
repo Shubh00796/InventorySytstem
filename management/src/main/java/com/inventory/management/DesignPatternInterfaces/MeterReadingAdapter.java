@@ -1,4 +1,4 @@
-package com.inventory.management.VendorInterfaces;
+package com.inventory.management.DesignPatternInterfaces;
 
 import com.inventory.management.Model.MeterReading;
 

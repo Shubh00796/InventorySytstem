@@ -1,17 +1,15 @@
-package com.inventory.management.VendorAdapators;
+package com.inventory.management.DesignPatternsImpl;
 
-import com.inventory.management.Dtos.VendorAMeterReadingDTO;
 import com.inventory.management.Dtos.VendorBMeterReadingDTO;
 import com.inventory.management.Exceptions.ResourceNotFoundException;
 import com.inventory.management.Model.MeterReading;
-import com.inventory.management.VendorInterfaces.MeterReadingAdapter;
+import com.inventory.management.DesignPatternInterfaces.MeterReadingAdapter;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 @Component
 public class VendorBMeterReadingAdapter implements MeterReadingAdapter<VendorBMeterReadingDTO> {
