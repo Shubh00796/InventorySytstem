@@ -1,9 +1,9 @@
 package com.inventory.management.AdpatorFactory;
 
 import com.inventory.management.Exceptions.ResourceNotFoundException;
-import com.inventory.management.VendorAdapators.VendorAMeterReadingAdapter;
-import com.inventory.management.VendorAdapators.VendorBMeterReadingAdapter;
-import com.inventory.management.VendorInterfaces.MeterReadingAdapter;
+import com.inventory.management.DesignPatternsImpl.VendorAMeterReadingAdapter;
+import com.inventory.management.DesignPatternsImpl.VendorBMeterReadingAdapter;
+import com.inventory.management.DesignPatternInterfaces.MeterReadingAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

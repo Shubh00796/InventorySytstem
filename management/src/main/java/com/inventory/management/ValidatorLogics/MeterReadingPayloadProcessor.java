@@ -5,7 +5,7 @@ import com.inventory.management.AdpatorFactory.MeterReadingAdapterFactory;
 import com.inventory.management.Dtos.VendorAMeterReadingDTO;
 import com.inventory.management.Dtos.VendorBMeterReadingDTO;
 import com.inventory.management.Model.MeterReading;
-import com.inventory.management.VendorInterfaces.MeterReadingAdapter;
+import com.inventory.management.DesignPatternInterfaces.MeterReadingAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

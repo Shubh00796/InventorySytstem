@@ -1,8 +1,8 @@
-package com.inventory.management.VendorInterfaces;
+package com.inventory.management.DesignPatternInterfaces;
 
 import com.inventory.management.Exceptions.ResourceNotFoundException;
-import com.inventory.management.VendorAdapators.SuburbanListingAdapter;
-import com.inventory.management.VendorAdapators.UrbanListingAdapter;
+import com.inventory.management.DesignPatternsImpl.SuburbanListingAdapter;
+import com.inventory.management.DesignPatternsImpl.UrbanListingAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

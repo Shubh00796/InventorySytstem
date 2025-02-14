@@ -1,9 +1,9 @@
-package com.inventory.management.VendorAdapators;
+package com.inventory.management.DesignPatternsImpl;
 
 import com.inventory.management.Dtos.UrbanListingDTO;
 import com.inventory.management.Exceptions.ResourceNotFoundException;
 import com.inventory.management.Model.PropertyListing;
-import com.inventory.management.VendorInterfaces.ListingAdapter;
+import com.inventory.management.DesignPatternInterfaces.ListingAdapter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

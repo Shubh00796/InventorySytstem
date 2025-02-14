@@ -1,9 +1,9 @@
-package com.inventory.management.VendorAdapators;
+package com.inventory.management.DesignPatternsImpl;
 
 import com.inventory.management.Dtos.FitbitActivityDTO;
 import com.inventory.management.Exceptions.ResourceNotFoundException;
 import com.inventory.management.Model.ActivityData;
-import com.inventory.management.VendorInterfaces.ActivityDataAdapter;
+import com.inventory.management.DesignPatternInterfaces.ActivityDataAdapter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
