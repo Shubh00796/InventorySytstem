@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @CircuitBreaker(name = EVENT_SERVICE, fallbackMethod = "com.inventory.management.fallbacks.EventFallbackService.fallbackCreateEvent")
     public EventDTO createEvent(EventDTO eventDTO) {
-        log.info("creating an evenr")
+        log.info("creating an evenr");
         return eventMapper.toDTO(eventReposiotryService.save(eventMapper.toEntity(eventDTO)));
     }
 
