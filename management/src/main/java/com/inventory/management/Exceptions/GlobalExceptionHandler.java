@@ -29,4 +29,18 @@ public class GlobalExceptionHandler {
         errorDetails.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(BookingNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleBookingNotFound(BookingNotFoundException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(OverlappingBookingException.class)
+    public ResponseEntity<Map<String, String>> handleOverlappingBooking(OverlappingBookingException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
 }
