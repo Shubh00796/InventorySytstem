@@ -1,5 +1,6 @@
 package com.inventory.management.Model;
 
+import com.inventory.management.Enums.IssueStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,32 +10,32 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Builder
-@AllArgsConstructor
+@Table(name = "issues")
 @Data
 @NoArgsConstructor
-public class Project {
+@AllArgsConstructor
+@Builder
+public class Issue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
+    private String title;
     private String description;
 
-    @Column(name = "settings")
-    private String settings;
+    @Enumerated(EnumType.STRING)
+    private IssueStatus status;
 
-    @Column(name = "roles")
-    private String roles;
+    private String priority;
 
-    @Column(name = "permissions")
-    private String permissions;
+    private String assigneeId;
+    private String reporterId;
+    private Long projectId;
 
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
     @Version
     private Integer version;
-    private LocalDateTime updatedAt;
 }
