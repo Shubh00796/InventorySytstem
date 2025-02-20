@@ -25,6 +25,10 @@ public class ProjectRepositoryService {
                 .orElseThrow(() -> new ResourceNotFoundException("Project with ID " + id + " not found"));
     }
 
+    boolean existsById(Long id) {
+        return projectRepository.existsById(id);
+    }
+
     public Project saveProject(Project project) {
         return projectRepository.save(project);
     }
