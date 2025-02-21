@@ -14,11 +14,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 @Slf4j
 public class WorkflowServiceImpl implements WorkflowService {
+
     private final WorkflowRepositoryService repositoryService;
     private final WorkflowMapper mapper;
     private final WorkflowEventPublisher eventPublisher;
@@ -29,40 +31,43 @@ public class WorkflowServiceImpl implements WorkflowService {
         entity.setCreatedAt(LocalDateTime.now());
         entity.setStatus(Optional.ofNullable(entity.getStatus()).orElse(WorkflowStatus.PENDING));
 
-        Workflow savedWorkflow = repositoryService.saveWorkFlows(entity);
-        return mapper.toDto(savedWorkflow);
-
+        return saveAndConvertToDto(entity);
     }
 
     @Override
     public WorkflowDTO updateWorkflow(Long id, WorkflowDTO workflowDTO) {
-        Workflow existingWorkflow = repositoryService.getWorkFlowByIdFromDb(id);
-
-        WorkflowStatus oldStatus = existingWorkflow.getStatus();
-        WorkflowStatus newStatus = workflowDTO.getStatus();
-
-        validateStateTransition(oldStatus, newStatus);
+        Workflow existingWorkflow = getWorkflowEntity(id);
+        validateStateTransition(existingWorkflow.getStatus(), workflowDTO.getStatus());
 
         mapper.updateEntityFromDto(workflowDTO, existingWorkflow);
         existingWorkflow.setUpdatedAt(LocalDateTime.now());
 
-
-        return null;
+        return saveAndConvertToDto(existingWorkflow);
     }
-
     @Override
-    public WorkflowDTO getWorkflowById(Long id) {
-        return null;
+    public Optional<WorkflowDTO> getWorkflowById(Long id) {
+        return Optional.ofNullable(repositoryService.getWorkFlowByIdFromDb(id))
+                .map(mapper::toDto);
     }
 
     @Override
     public List<WorkflowDTO> getAllWorkflows() {
-        return List.of();
+        return repositoryService.retriveAllWorkflows().stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void deleteWorkflow(Long id) {
+        repositoryService.deleteProject(id);
+    }
 
+    private WorkflowDTO saveAndConvertToDto(Workflow workflow) {
+        return mapper.toDto(repositoryService.saveWorkFlows(workflow));
+    }
+
+    private Workflow getWorkflowEntity(Long id) {
+        return repositoryService.getWorkFlowByIdFromDb(id);
     }
 
     private void validateStateTransition(WorkflowStatus oldStatus, WorkflowStatus newStatus) {
