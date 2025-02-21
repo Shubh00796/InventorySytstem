@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,9 @@ public class WorkflowRepositoryService {
     public Workflow getWorkFlowByIdFromDb(Long id) {
         return workflowRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Project with ID " + id + " not found"));
+    }
+    public List<Workflow> retriveAllWorkflows() {
+        return workflowRepository.findAll();
     }
 
     public Optional<Workflow> retrieveWorkflowByName(String name) {

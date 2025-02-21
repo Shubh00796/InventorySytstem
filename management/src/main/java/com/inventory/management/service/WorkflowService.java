@@ -4,6 +4,7 @@ package com.inventory.management.service;
 import com.inventory.management.Dtos.WorkflowDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface WorkflowService {
 
@@ -11,7 +12,7 @@ public interface WorkflowService {
 
     WorkflowDTO updateWorkflow(Long id, WorkflowDTO workflowDTO);
 
-    WorkflowDTO getWorkflowById(Long id);
+   Optional< WorkflowDTO> getWorkflowById(Long id);
 
     List<WorkflowDTO> getAllWorkflows();
 
