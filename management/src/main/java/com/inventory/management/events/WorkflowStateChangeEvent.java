@@ -1,5 +1,6 @@
 package com.inventory.management.events;
 
+import com.inventory.management.Enums.ReportType;
 import com.inventory.management.Enums.WorkflowStatus;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
@@ -31,4 +32,6 @@ public class WorkflowStateChangeEvent extends ApplicationEvent {
         this.oldStatus = oldStatus;
         this.newStatus = newStatus;
     }
+
+
 }
