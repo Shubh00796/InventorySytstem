@@ -1,7 +1,9 @@
 package com.inventory.management.events;
 
+import com.inventory.management.Enums.ReportType;
 import com.inventory.management.Enums.WorkflowStatus;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEvent;
 
 /**
@@ -11,24 +13,29 @@ import org.springframework.context.ApplicationEvent;
  * </p>
  */
 @Getter
-public class WorkflowStateChangeEvent extends ApplicationEvent {
+public class ReportGeneratedEvent extends ApplicationEvent {
 
-    private final Long workflowId;
-    private final WorkflowStatus oldStatus;
-    private final WorkflowStatus newStatus;
+
+
 
     /**
      * Constructs a new {@code WorkflowStateChangeEvent}.
      *
-     * @param source     the object on which the event initially occurred (never {@code null})
-     * @param workflowId the identifier of the workflow
-     * @param oldStatus  the previous state of the workflow
-     * @param newStatus  the new state of the workflow
+     * @param source    the object on which the event initially occurred (never {@code null})
+     * @param reportId  the identifier of the workflow
+     * @param oldStatus the previous state of the workflow
+     * @param newStatus the new state of the workflow
      */
-    public WorkflowStateChangeEvent(Object source, Long workflowId, WorkflowStatus oldStatus, WorkflowStatus newStatus) {
-        super(source);
-        this.workflowId = workflowId;
-        this.oldStatus = oldStatus;
-        this.newStatus = newStatus;
+
+
+        private final Long reportId;
+        private final ReportType oldStatus;
+        private final ReportType newStatus;
+
+        public ReportGeneratedEvent(Object source, Long reportId, ReportType oldStatus, ReportType newStatus) {
+            super(source);
+            this.reportId = reportId;
+            this.oldStatus = oldStatus;
+            this.newStatus = newStatus;
+        }
     }
-}

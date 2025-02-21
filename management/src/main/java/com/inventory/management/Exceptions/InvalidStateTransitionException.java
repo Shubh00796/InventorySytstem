@@ -1,4 +1,9 @@
 package com.inventory.management.Exceptions;
 
-public class InvalidStateTransitionException {
+import com.inventory.management.Enums.ReportType;
+
+public class InvalidStateTransitionException extends Throwable {
+    public InvalidStateTransitionException(ReportType oldStatus, ReportType newStatus) {
+
+    }
 }
