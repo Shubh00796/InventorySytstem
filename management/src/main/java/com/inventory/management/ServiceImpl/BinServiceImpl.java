@@ -2,6 +2,7 @@ package com.inventory.management.ServiceImpl;
 
 import com.inventory.management.Dtos.BinDTO;
 import com.inventory.management.Mapper.BinMapper;
+import com.inventory.management.Model.Bin;
 import com.inventory.management.ReposiotryServices.BinRepositryService;
 import com.inventory.management.service.BinService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,11 @@ public class BinServiceImpl implements BinService {
 
     @Override
     public BinDTO createBin(BinDTO binDTO) {
+        if(binDTO.getCapacity()<= 0){
+            throw new IllegalArgumentException("Capacity must be greater than zero");
+        }
+        Bin entity = mapper.toEntity(binDTO);
+
         return null;
     }
 
