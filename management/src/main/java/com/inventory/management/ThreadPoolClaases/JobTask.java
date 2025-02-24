@@ -1,6 +1,5 @@
 package com.inventory.management.ThreadPoolClaases;
 
-import com.inventory.management.Enums.TaskStatus;
 import com.inventory.management.Enums.WorkerTaskStatus;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
