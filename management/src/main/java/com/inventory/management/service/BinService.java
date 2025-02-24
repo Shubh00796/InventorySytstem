@@ -9,11 +9,11 @@ public interface BinService {
 
     BinDTO createBin(BinDTO binDTO);
 
-    BinDTO updateBin(BinDTO binDTO);
+    BinDTO updateBin(BinDTO binDTO) throws InterruptedException;
 
     Optional<BinDTO> getBinById(Long id);
 
-    List<BinDTO> getAllBins();
+    List<BinDTO> getAllBins(int page ,int size);
 
-    void deleteBin(Long id);
+    void deleteBin(Long id) throws InterruptedException;
 }
