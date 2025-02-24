@@ -1,19 +1,17 @@
 package com.inventory.management.events;
 
 import com.inventory.management.Model.Bin;
-import lombok.Data;
+import com.inventory.management.ServiceImpl.BinServiceImpl;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEvent;
-
-import java.time.Clock;
 
 @Getter
 public class BinFullEvent extends ApplicationEvent {
     private final Bin bin;
 
 
-    public BinFullEvent(Bin bin) {
+
+    public BinFullEvent(BinServiceImpl binService, Bin bin) {
         super(bin);
         this.bin = bin;
     }
