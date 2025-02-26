@@ -1,5 +1,6 @@
 package com.inventory.management.Model;
 
+import com.inventory.management.Enums.Sentiment;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,4 +27,5 @@ public class Feedback {
     private String review;
     private int rating;
     private LocalDateTime createdAt;
+    private Sentiment sentiment;
 }
