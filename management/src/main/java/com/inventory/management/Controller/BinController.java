@@ -27,9 +27,9 @@ public class BinController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BinDTO> updateBin(@PathVariable Long id, @Valid @RequestBody BinDTO binDTO) throws InterruptedException {
-        binDTO.setId(id);
-        log.info("Updating bin with ID: {}", id);
+    public ResponseEntity<BinDTO> updateBin(@PathVariable Long binId, @Valid @RequestBody BinDTO binDTO) throws InterruptedException {
+        binDTO.setId(binId);
+        log.info("Updating bin with ID: {}", binId);
         BinDTO updatedBin = binService.updateBin(binDTO);
         return ResponseEntity.ok(updatedBin);
     }
