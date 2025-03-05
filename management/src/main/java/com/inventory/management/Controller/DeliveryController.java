@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/deliveries")
 @RequiredArgsConstructor
-@Slf4j
 public class DeliveryController {
 
     private final DeliveryService deliveryService;
@@ -24,7 +23,6 @@ public class DeliveryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DeliveryDTO> getDeliveryById(@PathVariable Long id) {
-log.info("getting the delivery id " + id)
         return ResponseEntity.ok(deliveryService.getDeliveryById(id));
     }
 
