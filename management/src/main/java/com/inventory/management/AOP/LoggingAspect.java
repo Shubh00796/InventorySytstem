@@ -8,7 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
+<<<<<<< HEAD
 public class    LoggingAspect {
+=======
+public class LoggingAspect {
+>>>>>>> aa93d3b63e1c8eee7d6e8540034aa96021f96b15
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
