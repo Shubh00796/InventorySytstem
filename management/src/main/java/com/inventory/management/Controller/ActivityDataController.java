@@ -3,6 +3,7 @@ package com.inventory.management.Controller;
 import com.inventory.management.Dtos.ActivityDataDTO;
 import com.inventory.management.service.ActivityDataService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +12,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/activity-data")
 @RequiredArgsConstructor
+@Slf4j
 public class ActivityDataController {
 
     private final ActivityDataService activityDataService;
 
     @GetMapping
     public ResponseEntity<List<ActivityDataDTO>> getAllActivityData() {
+        log.info("info for updates ");
         return ResponseEntity.ok(activityDataService.getAllActivityData());
     }
 
