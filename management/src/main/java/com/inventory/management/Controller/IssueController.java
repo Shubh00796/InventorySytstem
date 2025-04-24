@@ -22,7 +22,7 @@ public class IssueController {
     // Create an issue
     @PostMapping
     public ResponseEntity<IssueDTO> createIssue(@Valid @RequestBody IssueDTO issueDTO) {
-        log.info("Creating new issue");
+        log.info("the new issue has been creatd ", issueDTO);
         IssueDTO createdIssue = issueService.createIssue(issueDTO);
         return ResponseEntity.ok(createdIssue);
     }
