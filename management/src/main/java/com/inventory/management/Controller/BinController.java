@@ -21,7 +21,7 @@ public class BinController {
 
     @PostMapping
     public ResponseEntity<BinDTO> createBin(@Valid @RequestBody BinDTO binDTO) {
-        log.info("Creating bin at location: {}", binDTO.getLocation());
+        log.info("Creating bin at locations: {}", binDTO.getLocation());
         BinDTO createdBin = binService.createBin(binDTO);
         return ResponseEntity.ok(createdBin);
     }
