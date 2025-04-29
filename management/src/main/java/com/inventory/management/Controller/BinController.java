@@ -17,6 +17,7 @@ import java.util.Optional;
 @Slf4j
 public class BinController {
 
+    public static final String FETCHING_ALL_BINS_PAGSSA_E_SIZE = "Fetching all bins (pagssa e: {}, size: {})";
     private final BinService binService;
 
     @PostMapping
@@ -44,7 +45,7 @@ public class BinController {
     @GetMapping
     public ResponseEntity<List<BinDTO>> getAllBins(@RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "10") int size) {
-        log.info("Fetching all bins (page: {}, size: {})", page, size);
+        log.info(FETCHING_ALL_BINS_PAGSSA_E_SIZE, page, size);
         List<BinDTO> bins = binService.getAllBins(page, size);
         return ResponseEntity.ok(bins);
     }
