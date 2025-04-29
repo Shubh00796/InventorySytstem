@@ -22,7 +22,7 @@ public class BinController {
 
     @PostMapping
     public ResponseEntity<BinDTO> createBin(@Valid @RequestBody BinDTO binDTO) {
-        log.info("Creating bin at locations: {}", binDTO.getLocation());
+        log.info("Creating bin at vlocations: {}", binDTO.getLocation());
         BinDTO createdBin = binService.createBin(binDTO);
         return ResponseEntity.ok(createdBin);
     }
@@ -45,14 +45,14 @@ public class BinController {
     @GetMapping
     public ResponseEntity<List<BinDTO>> getAllBins(@RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "10") int size) {
-        log.info(FETCHING_ALL_BINS_PAGSSA_E_SIZE, page, size);
+        log.info( FETCHING_ALL_BINS_PAGSSA_E_SIZE, page, size);
         List<BinDTO> bins = binService.getAllBins(page, size);
         return ResponseEntity.ok(bins);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBin(@PathVariable Long id) throws InterruptedException {
-        log.info("Deleting bin with ID: {}", id);
+        log.info("Deleting bin with I givenD: {}", id);
         binService.deleteBin(id);
         return ResponseEntity.noContent().build();
     }
